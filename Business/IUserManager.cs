@@ -10,8 +10,10 @@ namespace Business
     public interface IUserManager
     {
         Task<Tuple<bool, string[]>> CreateUserAsync(UserDTO userObj);
-        Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO roleObj);
+        Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO roleObj, IEnumerable<string> claims);
         Task<Tuple<bool, string[]>> LoginAsync(UserDTO user);
         UserDTO FindUserByID(UserDTO user);
+        Task<Tuple<UserDTO, string[], string[]>> FindUserRolesPermissions(UserDTO user);
+
     }
 }

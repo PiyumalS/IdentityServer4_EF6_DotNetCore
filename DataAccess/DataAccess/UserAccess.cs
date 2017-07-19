@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,40 +29,51 @@ namespace DataAccess.DataAccess
 
         public async Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO role, IEnumerable<string> claims)
         {
-            try
+            ObjectMapper mapper = new ObjectMapper();
+            ApplicationRole appRole = mapper.ConvertRoleToIdentityRole(role);
+
+            using (var dbContextTransaction = _context.Database.BeginTransaction())
             {
-                ObjectMapper mapper = new ObjectMapper();
-                ApplicationRole appRole = mapper.ConvertRoleToIdentityRole(role);
-
-                var result = await _appRoleManager.CreateAsync(appRole);
-                if (!result.Succeeded)
-                    return Tuple.Create(false, result.Errors.ToArray());
-
-
-                appRole = await _appRoleManager.FindByNameAsync(appRole.Name);
-
-                if (claims != null)
+                try
                 {
-                    //foreach (string claim in claims.Distinct())
-                    //{
-                    //    result = await this._roleManager.AddClaimAsync(role, new Claim(CustomClaimTypes.Permission, ApplicationPermissions.GetPermissionByValue(claim)));
 
-                    //    if (!result.Succeeded)
-                    //    {
-                    //        await DeleteRoleAsync(role);
-                    //        return Tuple.Create(false, result.Errors.Select(e => e.Description).ToArray());
-                    //    }
-                    //}
+                    var result = await _appRoleManager.CreateAsync(appRole);
+                    if (!result.Succeeded)
+                        return Tuple.Create(false, result.Errors.ToArray());
+
+
+                    appRole = await _appRoleManager.FindByNameAsync(appRole.Name);
+
+
+                    if (claims != null)
+                    {
+                        List<RolePermission> rolePermissionList = new List<RolePermission>();
+
+                        foreach (string claim in claims)
+                        {
+                            RolePermission tmpDTO = new RolePermission();
+                            tmpDTO.PermissionID = claim;
+                            tmpDTO.RoleID = appRole.Id;
+
+                            rolePermissionList.Add(tmpDTO);
+                        }
+
+                        _context.RolePermissions.AddRange(rolePermissionList);
+                        await _context.SaveChangesAsync();
+                        dbContextTransaction.Commit();
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    dbContextTransaction.Rollback();
+                    throw ex;
                 }
 
             }
-            catch (Exception ex)
-            {
 
-                throw ex;
-            }
-
-            return Tuple.Create(true, new string[] { role.Id });
+            return Tuple.Create(true, new string[] { appRole.Id });
         }
 
         public async Task<Tuple<bool, string[]>> CreateUserAsync(UserDTO user, IEnumerable<string> roles, string password)
@@ -69,10 +81,11 @@ namespace DataAccess.DataAccess
             ObjectMapper mapper = new ObjectMapper();
             ApplicationUser appUser = mapper.ConvertUserToIdentityUser(user);
 
+
             try
             {
 
-                var result = await _appUserManager.CreateAsync(appUser, password); 
+                var result = await _appUserManager.CreateAsync(appUser, password);
 
                 if (!result.Succeeded)
                 {
@@ -211,6 +224,33 @@ namespace DataAccess.DataAccess
             errorList.Add(existingUser.Id);
             return Tuple.Create(true, errorList.ToArray());
 
+        }
+
+        public async Task<Tuple<UserDTO, string[], string[]>> FindUserRolesPermissions(UserDTO user)
+        {
+            try
+            {
+                var existingUser = await _context.Users.Include(u => u.Roles).Where(u => u.Id == user.Id).FirstOrDefaultAsync();
+
+                if (existingUser == null) { return null; }
+
+                var userRolesIds = existingUser.Roles.Select(r => r.RoleId).ToList();
+
+                var roles = await _context.Roles.Where(r => userRolesIds.Contains(r.Id)).Select(r => r.Name).ToArrayAsync();
+
+                var permissions = await _context.RolePermissions.Where(r => userRolesIds.Contains(r.RoleID)).Select(p => p.PermissionID).ToArrayAsync();
+
+
+                ObjectMapper mapper = new ObjectMapper();
+
+                return Tuple.Create(mapper.ConvertIdentityUserToDomain(existingUser), roles, permissions);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

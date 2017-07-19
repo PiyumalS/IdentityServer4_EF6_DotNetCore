@@ -29,21 +29,25 @@ namespace SecureApiIdentityServer.Controllers
         public IEnumerable<string> Get()
         {
 
-            UserDTO nwDTO = new UserDTO();
-            nwDTO.Email = "nile@gmail.com";
-            nwDTO.IsTempararyPassword = true;
-            nwDTO.NationalID = "8857815142V";
-            nwDTO.IsFirstAttempt = true;
-            nwDTO.PhoneNumber = "123123123";
-            nwDTO.LockoutEnabled = false;
-            nwDTO.Password = "12";
+            //UserDTO nwDTO = new UserDTO();
+            //nwDTO.Email = "nile@gmail.com";
+            //nwDTO.IsTempararyPassword = true;
+            //nwDTO.NationalID = "8857815142V";
+            //nwDTO.IsFirstAttempt = true;
+            //nwDTO.PhoneNumber = "123123123";
+            //nwDTO.LockoutEnabled = false;
+            //nwDTO.Password = "12";
 
-            _userManager.CreateUserAsync(nwDTO);
+            //_userManager.CreateUserAsync(nwDTO);
 
             RoleDTO roleDTO = new RoleDTO();
-            roleDTO.Name = "Admin";
+            roleDTO.Name = "Admin4";
 
-            _userManager.CreateRoleAsync(roleDTO);
+            List<string> permissionList = new List<string>();
+            permissionList.Add("p1");
+            permissionList.Add("p2");
+
+            _userManager.CreateRoleAsync(roleDTO, permissionList);
 
             return new string[] { "value1", "value2" };
 

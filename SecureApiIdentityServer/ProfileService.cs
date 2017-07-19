@@ -23,17 +23,32 @@ namespace SecureApiIdentityServer
 
         public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
-            var userID = context.Subject.GetSubjectId();
+            UserDTO usrDTO = new UserDTO();
+            usrDTO.Id = context.Subject.GetSubjectId();
+
+            var userDetails = _userManager.FindUserRolesPermissions(usrDTO).Result;
+
+            var userObj = userDetails.Item1;
+            var usrRoles = userDetails.Item2;
+            var usrPermission = userDetails.Item3;
 
             // add user claims (permissions + user data) , roles here
             var claims = new List<Claim>
             {
-               new Claim(JwtClaimTypes.Subject, userID.ToString()),
-               new Claim(JwtClaimTypes.Email, "aa@gmail.com"),
-               new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-               new Claim(JwtClaimTypes.Role,"Admin"),
-               new Claim("permission" ,"permission1")
+               new Claim(JwtClaimTypes.Subject, context.Subject.GetSubjectId()),
+               new Claim(JwtClaimTypes.Email, userObj.Email),
+               new Claim(JwtClaimTypes.EmailVerified, userObj.EmailConfirmed.ToString(), ClaimValueTypes.Boolean)
             };
+
+            for (int i = 0; i < usrRoles.Length; i++)
+            {
+                claims.Add(new Claim(JwtClaimTypes.Role, usrRoles.ElementAt(i)));
+            }
+
+            for (int i = 0; i < usrPermission.Length; i++)
+            {
+                claims.Add(new Claim("permission", usrPermission.ElementAt(i)));
+            }
 
             context.IssuedClaims = claims;
 
