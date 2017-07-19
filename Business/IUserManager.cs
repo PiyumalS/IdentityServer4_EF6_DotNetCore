@@ -11,5 +11,7 @@ namespace Business
     {
         Task<Tuple<bool, string[]>> CreateUserAsync(UserDTO userObj);
         Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO roleObj);
+        Task<Tuple<bool, string[]>> LoginAsync(UserDTO user);
+        UserDTO FindUserByID(UserDTO user);
     }
 }

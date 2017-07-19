@@ -23,6 +23,8 @@ namespace Domain
         public string NationalID { get; set; }
         public bool IsFirstAttempt { get; set; }
         public bool IsTempararyPassword { get; set; }
+        public bool ActiveStatus { get; set; }
+
 
     }
 }

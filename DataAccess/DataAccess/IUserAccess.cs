@@ -16,5 +16,8 @@ namespace DataAccess.DataAccess
         Task<Tuple<bool, string[]>> DeleteRoleAsync(string roleName);
         Task<Tuple<bool, string[]>> DeleteUserAsync(ApplicationUser user);
         Task<Tuple<bool, string[]>> DeleteUserAsync(string userId);
+        Task<Tuple<bool, string[]>> LoginAsync(UserDTO user);
+        UserDTO FindUserByID(UserDTO user);
+
     }
 }

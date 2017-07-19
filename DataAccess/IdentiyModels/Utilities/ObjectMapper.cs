@@ -11,24 +11,29 @@ namespace DataAccess.IdentiyModels.Utilities
     {
         public ApplicationUser ConvertUserToIdentityUser(UserDTO usr)
         {
-            return new ApplicationUser()
-            {
-                AccessFailedCount = usr.AccessFailedCount,
-                Email = usr.Email,
-                //Id = usr.Id,
-                EmailConfirmed = usr.EmailConfirmed,
-                IsFirstAttempt = usr.IsFirstAttempt,
-                IsTempararyPassword = usr.IsTempararyPassword,
-                LockoutEnabled = usr.LockoutEnabled,
-                LockoutEndDateUtc = usr.LockoutEndDateUtc,
-                PasswordHash = usr.PasswordHash,
-                PhoneNumber = usr.PhoneNumber,
-                PhoneNumberConfirmed = usr.PhoneNumberConfirmed,
-                SecurityStamp = usr.SecurityStamp,
-                TwoFactorEnabled = usr.TwoFactorEnabled,
-                UserName = usr.NationalID
+            ApplicationUser appUser = new ApplicationUser();
 
-            };
+            appUser.AccessFailedCount = usr.AccessFailedCount;
+            appUser.Email = usr.Email;
+
+            if (!String.IsNullOrEmpty(usr.Id))
+            {
+                appUser.Id = usr.Id;
+            }
+
+            appUser.EmailConfirmed = usr.EmailConfirmed;
+            appUser.IsFirstAttempt = usr.IsFirstAttempt;
+            appUser.IsTempararyPassword = usr.IsTempararyPassword;
+            appUser.LockoutEnabled = usr.LockoutEnabled;
+            appUser.LockoutEndDateUtc = usr.LockoutEndDateUtc;
+            appUser.PasswordHash = usr.PasswordHash;
+            appUser.PhoneNumber = usr.PhoneNumber;
+            appUser.PhoneNumberConfirmed = usr.PhoneNumberConfirmed;
+            appUser.SecurityStamp = usr.SecurityStamp;
+            appUser.TwoFactorEnabled = usr.TwoFactorEnabled;
+            appUser.UserName = usr.NationalID;
+            appUser.ActiveStatus = usr.ActiveStatus;
+            return appUser;
         }
 
 
@@ -49,7 +54,8 @@ namespace DataAccess.IdentiyModels.Utilities
                 PhoneNumberConfirmed = appUser.PhoneNumberConfirmed,
                 SecurityStamp = appUser.SecurityStamp,
                 TwoFactorEnabled = appUser.TwoFactorEnabled,
-                NationalID = appUser.UserName
+                NationalID = appUser.UserName,
+                ActiveStatus = appUser.ActiveStatus
 
             };
         }
@@ -58,7 +64,7 @@ namespace DataAccess.IdentiyModels.Utilities
         {
             return new ApplicationRole()
             {
-                Name = role.Name                
+                Name = role.Name
             };
         }
 

@@ -12,6 +12,8 @@ namespace DataAccess.IdentiyModels
     {
         public bool IsFirstAttempt { get; set; }
         public bool IsTempararyPassword { get; set; }
+        public bool ActiveStatus { get; set; }
+
 
     }
 }

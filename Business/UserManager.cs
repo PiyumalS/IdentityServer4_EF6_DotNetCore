@@ -29,5 +29,16 @@ namespace Business
             var createdUser = await _userAccess.CreateUserAsync(userObj, null, userObj.Password);
             return Tuple.Create(createdUser.Item1, new string[] { createdUser.Item2.ToString() });
         }
+
+        public UserDTO FindUserByID(UserDTO user)
+        {
+            return _userAccess.FindUserByID(user);
+        }
+
+        public async Task<Tuple<bool, string[]>> LoginAsync(UserDTO user)
+        {
+            var loginResult = await _userAccess.LoginAsync(user);
+            return Tuple.Create(loginResult.Item1, new string[] { loginResult.Item2[0].ToString() });
+        }
     }
 }

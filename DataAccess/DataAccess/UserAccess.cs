@@ -144,5 +144,73 @@ namespace DataAccess.DataAccess
 
             return Tuple.Create(true, new string[] { });
         }
+        public UserDTO FindUserByID(UserDTO user)
+        {
+            ObjectMapper mapper = new ObjectMapper();
+            ApplicationUser appUser = _appUserManager.FindById(user.Id);
+            if (appUser != null)
+            {
+                return mapper.ConvertIdentityUserToDomain(appUser);
+            }
+            return null;
+
+        }
+
+        public async Task<Tuple<bool, string[]>> LoginAsync(UserDTO user)
+        {
+            var existingUser = _appUserManager.FindByNameAsync(user.NationalID).Result;
+
+            List<string> errorList = new List<string>();
+
+            string[] errors = new string[1];
+
+            if (existingUser == null)
+            {
+                //return invalid user name or password
+                errorList.Add("Invalid user name or password");
+                return Tuple.Create(false, errorList.ToArray());
+
+            }
+
+            if (!existingUser.ActiveStatus)
+            {
+                //return user disabled
+                errorList.Add("User disabled");
+                return Tuple.Create(false, errorList.ToArray());
+            }
+
+            //can sign in part
+
+            if (_appUserManager.SupportsUserLockout && await _appUserManager.IsLockedOutAsync(existingUser.Id))
+            {
+                //return user locked out
+                errorList.Add("User locked");
+                return Tuple.Create(false, errorList.ToArray());
+
+            }
+
+
+            //checks the password
+            if (!_appUserManager.CheckPasswordAsync(existingUser, user.Password).Result)
+            {
+                if (_appUserManager.SupportsUserLockout)
+                {
+                    await _appUserManager.AccessFailedAsync(existingUser.Id); // updates the access fail count
+                }
+
+                errorList.Add("User name or password invalid");
+                return Tuple.Create(false, errorList.ToArray());
+
+            }
+
+            if (_appUserManager.SupportsUserLockout)
+            {
+                await _appUserManager.ResetAccessFailedCountAsync(existingUser.Id);
+            }
+
+            errorList.Add(existingUser.Id);
+            return Tuple.Create(true, errorList.ToArray());
+
+        }
     }
 }

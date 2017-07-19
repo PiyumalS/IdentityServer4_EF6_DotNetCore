@@ -7,11 +7,20 @@ using IdentityServer4.Models;
 using IdentityServer4.Extensions;
 using System.Security.Claims;
 using IdentityModel;
+using Business;
+using Domain;
 
 namespace SecureApiIdentityServer
 {
     public class ProfileService : IProfileService
     {
+        public IUserManager _userManager;
+
+        public ProfileService(IUserManager userManager)
+        {
+            _userManager = userManager;
+        }
+
         public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             var userID = context.Subject.GetSubjectId();
@@ -33,8 +42,19 @@ namespace SecureApiIdentityServer
 
         public Task IsActiveAsync(IsActiveContext context)
         {
-            context.IsActive = true; // check with identiy user;
+            UserDTO searchDTO = new UserDTO();
+            searchDTO.Id = context.Subject.GetSubjectId();
 
+            var existingUser = _userManager.FindUserByID(searchDTO);
+
+            if (existingUser != null)
+            {
+                context.IsActive = existingUser.ActiveStatus;
+            }
+            else
+            {
+                context.IsActive = false; // check with identiy user;
+            }
             return Task.FromResult(0);
         }
     }
