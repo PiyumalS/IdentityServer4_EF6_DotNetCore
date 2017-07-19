@@ -15,6 +15,8 @@ using Business;
 using DataAccess.IdentiyModels;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using Microsoft.AspNetCore.Authorization;
+using SecureApiIdentityServer.AuthorizationHandler;
 
 namespace SecureApiIdentityServer
 {
@@ -38,11 +40,11 @@ namespace SecureApiIdentityServer
             services.AddScoped<TAD>(_ => new TAD(Configuration.GetConnectionString("DefaultConnection")));
 
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "permission1"));
-                options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "permission2"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "permission1"));
+            //    options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "permission2"));
+            //});
 
 
 
@@ -54,6 +56,7 @@ namespace SecureApiIdentityServer
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
              .AddTransient<IProfileService, ProfileService>();
 
+            services.AddSingleton<IAuthorizationHandler, HasPermissionHandler>();
 
             services.AddSingleton<IUserAccess, UserAccess>();
             services.AddSingleton<IUserManager, UserManager>();
