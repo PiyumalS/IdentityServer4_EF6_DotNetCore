@@ -66,13 +66,13 @@ namespace DataAccess.DataAccess
 
         public async Task<Tuple<bool, string[]>> CreateUserAsync(UserDTO user, IEnumerable<string> roles, string password)
         {
+            ObjectMapper mapper = new ObjectMapper();
+            ApplicationUser appUser = mapper.ConvertUserToIdentityUser(user);
 
             try
             {
-                ObjectMapper mapper = new ObjectMapper();
-                ApplicationUser appUser = mapper.ConvertUserToIdentityUser(user);
 
-                var result = await _appUserManager.CreateAsync(appUser, password); // for the first time , password is hard coded
+                var result = await _appUserManager.CreateAsync(appUser, password); 
 
                 if (!result.Succeeded)
                 {
@@ -108,7 +108,7 @@ namespace DataAccess.DataAccess
                 throw ex;
             }
 
-            return Tuple.Create(true, new string[] { user.Id });
+            return Tuple.Create(true, new string[] { appUser.Id });
 
 
         }
