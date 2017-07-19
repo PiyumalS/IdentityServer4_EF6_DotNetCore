@@ -28,25 +28,39 @@ namespace SecureApiIdentityServer.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            try
+            {
+                RoleDTO roleDTO = new RoleDTO();
+                roleDTO.Name = "Admin6";
 
-            UserDTO nwDTO = new UserDTO();
-            nwDTO.Email = "nile@gmail.com";
-            nwDTO.IsTempararyPassword = true;
-            nwDTO.NationalID = "8857815142V";
-            nwDTO.IsFirstAttempt = true;
-            nwDTO.PhoneNumber = "123123123";
-            nwDTO.LockoutEnabled = false;
-            nwDTO.Password = "12";
+                _userManager.CreateRoleAsync(roleDTO);
 
-            _userManager.CreateUserAsync(nwDTO);
+                try
+                {
+                    UserDTO nwDTO = new UserDTO();
+                    nwDTO.Email = "nile@gmail.com";
+                    nwDTO.IsTempararyPassword = true;
+                    nwDTO.NationalID = "8857815122V";
+                    nwDTO.IsFirstAttempt = true;
+                    nwDTO.PhoneNumber = "123123123";
+                    nwDTO.LockoutEnabled = false;
+                    nwDTO.Password = "123456";
 
-            RoleDTO roleDTO = new RoleDTO();
-            roleDTO.Name = "Admin";
+                    _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
 
-            _userManager.CreateRoleAsync(roleDTO);
+                    return new string[] { "value1", "value2" };
 
-            return new string[] { "value1", "value2" };
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
 
