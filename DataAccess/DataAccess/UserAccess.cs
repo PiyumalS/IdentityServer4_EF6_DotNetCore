@@ -86,13 +86,12 @@ namespace DataAccess.DataAccess
                 {
                     if (roles != null)
                     {
-                        result = await _appUserManager.AddToRolesAsync(user.Id, roles.ToArray());
+                        result = await _appUserManager.AddToRolesAsync(appUser.Id, roles.ToArray());
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    await DeleteUserAsync(appUser);
-                    throw;
+                    throw ex;
                 }
 
                 if (!result.Succeeded)
@@ -104,7 +103,6 @@ namespace DataAccess.DataAccess
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 
