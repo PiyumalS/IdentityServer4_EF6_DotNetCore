@@ -31,9 +31,9 @@ namespace SecureApiIdentityServer.Controllers
             try
             {
                 RoleDTO roleDTO = new RoleDTO();
-                roleDTO.Name = "Admin6";
+                roleDTO.Name = "Admin1";
 
-                // _userManager.CreateRoleAsync(roleDTO);
+                //_userManager.CreateRoleAsync(roleDTO);
 
                 try
                 {
