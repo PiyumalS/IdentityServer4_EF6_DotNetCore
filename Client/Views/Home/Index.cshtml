@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<jmsl-app>
+
+    <div id="pre-bootstrap">
+        <div class="messaging">
+            <h1>
+                App is Loading...
+            </h1>
+            <div class="cs-loader">
+                <div class="cs-loader-inner">
+                    <label>&#9679</label>
+                    <label>&#9679</label>
+                    <label>&#9679</label>
+                    <label>&#9679</label>
+                    <label>&#9679</label>
+                    <label>&#9679</label>
+                </div>
+            </div>
+            <p>
+                JMSL TAD
+            </p>
+
+        </div>
+    </div>
+</jmsl-app>
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+}

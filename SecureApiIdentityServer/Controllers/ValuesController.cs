@@ -34,9 +34,9 @@ namespace SecureApiIdentityServer.Controllers
             try
             {
                 RoleDTO roleDTO = new RoleDTO();
-                roleDTO.Name = "Admin6";
+                roleDTO.Name = "Admin1";
 
-                // _userManager.CreateRoleAsync(roleDTO);
+                //_userManager.CreateRoleAsync(roleDTO);
 
                 try
                 {
@@ -50,6 +50,8 @@ namespace SecureApiIdentityServer.Controllers
                     nwDTO.Password = "123456";
 
                     //  _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
+
+
 
                     return new string[] { "value1", "value2" };
 
@@ -69,7 +71,7 @@ namespace SecureApiIdentityServer.Controllers
         }
 
         // GET api/values/5
-        // [Authorize("permission2")]
+        [Authorize("permission3")]
         [HttpGet("{id}")]
        // [Authorize]
         [RequiresPermission("p3")]
