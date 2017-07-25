@@ -99,7 +99,12 @@ namespace DataAccess.DataAccess
                 {
                     if (roles != null)
                     {
-                        result = await _appUserManager.AddToRolesAsync(user.Id, roles.ToArray());
+                        result = await _appUserManager.AddToRolesAsync(appUser.Id, roles.ToArray());
+                    }
+
+                    if (appUser != null)
+                    {
+                        _appUserManager.SetLockoutEnabled(appUser.Id, true);
                     }
                 }
                 catch
@@ -193,8 +198,9 @@ namespace DataAccess.DataAccess
             }
 
             //can sign in part
+            //  bool b = _appUserManager.GetLockoutEnabledAsync(existingUser.Id).Result;
 
-            if (_appUserManager.SupportsUserLockout && await _appUserManager.IsLockedOutAsync(existingUser.Id))
+            if (_appUserManager.SupportsUserLockout && _appUserManager.IsLockedOutAsync(existingUser.Id).Result)
             {
                 //return user locked out
                 errorList.Add("User locked");

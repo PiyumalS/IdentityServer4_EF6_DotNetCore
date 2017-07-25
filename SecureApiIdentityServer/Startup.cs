@@ -15,6 +15,8 @@ using Business;
 using DataAccess.IdentiyModels;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using Microsoft.AspNetCore.Authorization;
+using SecureApiIdentityServer.AuthorizationHandler;
 
 namespace SecureApiIdentityServer
 {
@@ -37,14 +39,13 @@ namespace SecureApiIdentityServer
         {
             services.AddScoped<TAD>(_ => new TAD(Configuration.GetConnectionString("DefaultConnection")));
 
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "p1"));
-                options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "p2"));
-                options.AddPolicy("permission3", policy => policy.RequireClaim("permission", "p3"));
-                options.AddPolicy("permission4", policy => policy.RequireClaim("permission", "p4"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "p1"));
+            //    options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "p2"));
+            //    options.AddPolicy("permission3", policy => policy.RequireClaim("permission", "p3"));
+            //    options.AddPolicy("permission4", policy => policy.RequireClaim("permission", "p4"));
+            //});
 
 
 
@@ -56,6 +57,7 @@ namespace SecureApiIdentityServer
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
              .AddTransient<IProfileService, ProfileService>();
 
+            services.AddSingleton<IAuthorizationHandler, HasPermissionHandler>();
 
             services.AddSingleton<IUserAccess, UserAccess>();
             services.AddSingleton<IUserManager, UserManager>();

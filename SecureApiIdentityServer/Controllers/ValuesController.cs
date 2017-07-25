@@ -8,6 +8,7 @@ using DataAccess.DataAccess;
 using DataAccess.IdentiyModels;
 using Business;
 using Domain;
+using SecureApiIdentityServer.AuthorizationHandler;
 
 namespace SecureApiIdentityServer.Controllers
 {
@@ -26,6 +27,8 @@ namespace SecureApiIdentityServer.Controllers
         // GET api/values
         //[Authorize("permission1")]
         [HttpGet]
+        [Authorize]
+        [RequiresPermission("p1")]
         public IEnumerable<string> Get()
         {
             try
@@ -46,7 +49,9 @@ namespace SecureApiIdentityServer.Controllers
                     nwDTO.LockoutEnabled = false;
                     nwDTO.Password = "123456";
 
-                   // _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
+                    //  _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
+
+
 
                     return new string[] { "value1", "value2" };
 
@@ -68,6 +73,8 @@ namespace SecureApiIdentityServer.Controllers
         // GET api/values/5
         [Authorize("permission3")]
         [HttpGet("{id}")]
+       // [Authorize]
+        [RequiresPermission("p3")]
         public string Get(int id)
         {
 

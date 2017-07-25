@@ -22,9 +22,15 @@ namespace DataAccess.IdentiyModels.Managers
             appUserManager.UserValidator = new UserValidator<ApplicationUser>(appUserManager)
             {
                 AllowOnlyAlphanumericUserNames = true,
-                RequireUniqueEmail = false
+                RequireUniqueEmail = false,
+
 
             };
+
+            appUserManager.MaxFailedAccessAttemptsBeforeLockout = 3;
+            appUserManager.DefaultAccountLockoutTimeSpan= TimeSpan.FromMinutes(3);
+          
+
 
             // Configure validation logic for passwords
             appUserManager.PasswordValidator = new PasswordValidator
@@ -33,9 +39,10 @@ namespace DataAccess.IdentiyModels.Managers
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,
-                RequireUppercase = false
-            };
+                RequireUppercase = false,
+               
 
+            };
             return appUserManager;
         }
     }
