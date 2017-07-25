@@ -42,7 +42,10 @@ namespace SecureApiIdentityServer
                         new Secret("secret".Sha256())
                     },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-
+                    AllowedCorsOrigins = new List<string>
+                    {
+                      "http://localhost:52950/"
+                    },
                     AllowedScopes =
                     {
                        "api1"

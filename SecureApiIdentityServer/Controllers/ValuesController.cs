@@ -46,7 +46,7 @@ namespace SecureApiIdentityServer.Controllers
                     nwDTO.LockoutEnabled = false;
                     nwDTO.Password = "123456";
 
-                    _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
+                   // _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
 
                     return new string[] { "value1", "value2" };
 
@@ -66,7 +66,7 @@ namespace SecureApiIdentityServer.Controllers
         }
 
         // GET api/values/5
-        // [Authorize("permission2")]
+        [Authorize("permission3")]
         [HttpGet("{id}")]
         public string Get(int id)
         {

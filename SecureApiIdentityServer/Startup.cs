@@ -40,8 +40,10 @@ namespace SecureApiIdentityServer
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "permission1"));
-                options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "permission2"));
+                options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "p1"));
+                options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "p2"));
+                options.AddPolicy("permission3", policy => policy.RequireClaim("permission", "p3"));
+                options.AddPolicy("permission4", policy => policy.RequireClaim("permission", "p4"));
             });
 
 
@@ -57,7 +59,6 @@ namespace SecureApiIdentityServer
 
             services.AddSingleton<IUserAccess, UserAccess>();
             services.AddSingleton<IUserManager, UserManager>();
-
 
             // Add framework services.
             services.AddMvc();
@@ -75,10 +76,9 @@ namespace SecureApiIdentityServer
             {
                 Authority = "http://localhost:59330",
                 RequireHttpsMetadata = false,
-
+                
                 ApiName = "api1"
             });
-
 
             if (env.IsDevelopment())
             {
