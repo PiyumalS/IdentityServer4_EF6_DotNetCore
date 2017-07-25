@@ -71,9 +71,8 @@ namespace SecureApiIdentityServer.Controllers
         }
 
         // GET api/values/5
-        [Authorize("permission3")]
         [HttpGet("{id}")]
-       // [Authorize]
+        // [Authorize]
         [RequiresPermission("p3")]
         public string Get(int id)
         {
