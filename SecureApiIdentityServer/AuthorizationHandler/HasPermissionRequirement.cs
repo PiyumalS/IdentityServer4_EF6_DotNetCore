@@ -23,10 +23,8 @@ namespace SecureApiIdentityServer.AuthorizationHandler
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, HasPermissionRequirement requirement)
         {
             // Find the required permissions claim
-            bool isOk = false;
 
             var user = context.User;
-
 
             var claim = context.User.FindFirst(
                 c => c.Type == "permission"
