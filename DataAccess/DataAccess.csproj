@@ -63,6 +63,10 @@
     <Compile Include="IdentiyModels\Managers\ApplicationUserManager.cs" />
     <Compile Include="IdentiyModels\RolePermission.cs" />
     <Compile Include="IdentiyModels\Utilities\ObjectMapper.cs" />
+    <Compile Include="Migrations\201707251142034_mg1.cs" />
+    <Compile Include="Migrations\201707251142034_mg1.Designer.cs">
+      <DependentUpon>201707251142034_mg1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,13 +76,20 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{00c6f84e-13f8-4097-8406-aa727dd7a9ac}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707251142034_mg1.resx">
+      <DependentUpon>201707251142034_mg1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

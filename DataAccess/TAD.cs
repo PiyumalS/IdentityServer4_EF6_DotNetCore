@@ -23,6 +23,18 @@ namespace DataAccess
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<TAD>(null);
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("tad");
+
+            modelBuilder.Entity<ApplicationUser>().ToTable("TAD_T_Users");
+            modelBuilder.Entity<IdentityRole>().ToTable("TAD_T_Roles");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("TAD_T_UserRoles");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("TAD_T_UserLogins");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("TAD_T_UserClaims");
+        }
     }
 
 }
