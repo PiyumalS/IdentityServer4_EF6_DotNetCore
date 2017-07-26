@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -24,6 +20,6 @@ namespace Domain
         public bool IsFirstAttempt { get; set; }
         public bool IsTempararyPassword { get; set; }
         public bool ActiveStatus { get; set; }
- 
+
     }
 }
