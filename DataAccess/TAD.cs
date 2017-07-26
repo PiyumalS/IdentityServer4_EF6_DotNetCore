@@ -18,6 +18,7 @@ namespace DataAccess
         {
         }
 
+        public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
@@ -34,6 +35,8 @@ namespace DataAccess
             modelBuilder.Entity<IdentityUserRole>().ToTable("TAD_T_UserRoles");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("TAD_T_UserLogins");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("TAD_T_UserClaims");
+            modelBuilder.Entity<Permission>().ToTable("TAD_T_Permissions");
+            modelBuilder.Entity<RolePermission>().ToTable("TAD_T_RolePermissions");
         }
     }
 

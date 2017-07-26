@@ -21,7 +21,7 @@ namespace Business
             return Tuple.Create(createdRole.Item1, new string[] { createdRole.Item2.ToString() });
         }
 
-            public async Task<Tuple<bool, string[]>> CreateUserAsync(UserDTO userObj, IEnumerable<string> roles)
+        public async Task<Tuple<bool, string[]>> CreateUserAsync(UserDTO userObj, IEnumerable<string> roles)
         {
             var createdUser = await _userAccess.CreateUserAsync(userObj, roles, userObj.Password);
             return Tuple.Create(createdUser.Item1, new string[] { createdUser.Item2.ToString() });
