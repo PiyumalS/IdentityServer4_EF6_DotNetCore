@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Domain;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,15 +26,18 @@ namespace SecureApiIdentityServer.AuthorizationHandler
             // Find the required permissions claim
 
             var user = context.User;
+            List<string> toBeCheckedPermissions = requirement.Permission.Split(',').ToList();
 
-            var claim = context.User.FindFirst(
-                c => c.Type == "permission"
-                && c.Value == requirement.Permission);
+            if (user != null)
+            {
+                List<string> contextPermissions = user.FindAll(PermissionUtil.Permission).ToList().ConvertAll(x => x.Value);
 
-            // Succeed if the permissions array contains the required permission
-            if (claim != null)
-                context.Succeed(requirement);
+                if (contextPermissions != null && contextPermissions.Count > 0 && toBeCheckedPermissions.Intersect(contextPermissions).Count() > 0)
+                {
+                    context.Succeed(requirement);
 
+                }
+            }
 
             return Task.FromResult(0);
         }

@@ -33,21 +33,25 @@ namespace SecureApiIdentityServer.Controllers
         {
             try
             {
+
+
                 RoleDTO roleDTO = new RoleDTO();
                 roleDTO.Name = "Admin2";
 
-                //_userManager.CreateRoleAsync(roleDTO, new string[] { "p1","p2","p3" });
+                _userManager.CreateRoleAsync(roleDTO, new string[] { "p1", "p2", "p3" }).Wait();
+
+
 
                 try
                 {
                     UserDTO nwDTO = new UserDTO();
                     nwDTO.Email = "nile@gmail.com";
                     nwDTO.IsTempararyPassword = true;
-                    nwDTO.NationalID = "8957815122V";
+                    nwDTO.UserName = "8957815122V";
                     nwDTO.IsFirstAttempt = true;
                     nwDTO.PhoneNumber = "123123123";
                     nwDTO.LockoutEnabled = false;
-                    nwDTO.Password = "123456";
+                    nwDTO.Password = "123";
                     nwDTO.ActiveStatus = true;
 
                     _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
@@ -72,7 +76,7 @@ namespace SecureApiIdentityServer.Controllers
         // GET api/values/5
         [HttpGet("{id}")]
         // [Authorize]
-        [RequiresPermission("p3")]
+        [RequiresPermission("p3,p2")]
         public string Get(int id)
         {
 

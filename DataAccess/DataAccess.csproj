@@ -64,17 +64,13 @@
     <Compile Include="IdentiyModels\Permission.cs" />
     <Compile Include="IdentiyModels\RolePermission.cs" />
     <Compile Include="IdentiyModels\Utilities\ObjectMapper.cs" />
-    <Compile Include="Migrations\201707251142034_mg1.cs" />
-    <Compile Include="Migrations\201707251142034_mg1.Designer.cs">
-      <DependentUpon>201707251142034_mg1.cs</DependentUpon>
+    <Compile Include="Migrations\201707260945161_mg1.cs" />
+    <Compile Include="Migrations\201707260945161_mg1.Designer.cs">
+      <DependentUpon>201707260945161_mg1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201707260651342_mg2.cs" />
-    <Compile Include="Migrations\201707260651342_mg2.Designer.cs">
-      <DependentUpon>201707260651342_mg2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707260708244_mg3.cs" />
-    <Compile Include="Migrations\201707260708244_mg3.Designer.cs">
-      <DependentUpon>201707260708244_mg3.cs</DependentUpon>
+    <Compile Include="Migrations\201707270435505_mgr2.cs" />
+    <Compile Include="Migrations\201707270435505_mgr2.Designer.cs">
+      <DependentUpon>201707270435505_mgr2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds\ISeed.cs" />
@@ -99,14 +95,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707251142034_mg1.resx">
-      <DependentUpon>201707251142034_mg1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707260945161_mg1.resx">
+      <DependentUpon>201707260945161_mg1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707260651342_mg2.resx">
-      <DependentUpon>201707260651342_mg2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707260708244_mg3.resx">
-      <DependentUpon>201707260708244_mg3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707270435505_mgr2.resx">
+      <DependentUpon>201707270435505_mgr2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

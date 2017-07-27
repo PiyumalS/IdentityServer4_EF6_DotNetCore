@@ -35,7 +35,7 @@ namespace DataAccess.IdentiyModels.Managers
             // Configure validation logic for passwords
             appUserManager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 5,
+                RequiredLength = 2,
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,

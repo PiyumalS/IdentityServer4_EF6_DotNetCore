@@ -37,7 +37,12 @@ namespace SecureApiIdentityServer
             {
                new Claim(JwtClaimTypes.Subject, context.Subject.GetSubjectId()),
                new Claim(JwtClaimTypes.Email, userObj.Email),
-               new Claim(JwtClaimTypes.EmailVerified, userObj.EmailConfirmed.ToString(), ClaimValueTypes.Boolean)
+               new Claim(JwtClaimTypes.EmailVerified, userObj.EmailConfirmed.ToString(), ClaimValueTypes.Boolean),
+               new Claim("FullName",String.IsNullOrEmpty(userObj.FullName)?userObj.UserName:userObj.FullName),
+               new Claim("UserName",userObj.UserName),
+               new Claim("PhoneNumber",userObj.PhoneNumber),
+               new Claim("IsFirstAttempt",userObj.IsFirstAttempt.ToString(),ClaimValueTypes.Boolean),
+               new Claim("IsTempararyPassword",userObj.IsTempararyPassword.ToString(),ClaimValueTypes.Boolean)
             };
 
             for (int i = 0; i < usrRoles.Length; i++)
@@ -47,7 +52,7 @@ namespace SecureApiIdentityServer
 
             for (int i = 0; i < usrPermission.Length; i++)
             {
-                claims.Add(new Claim("permission", usrPermission.ElementAt(i)));
+                claims.Add(new Claim(PermissionUtil.Permission, usrPermission.ElementAt(i)));
             }
 
             context.IssuedClaims = claims;

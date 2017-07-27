@@ -176,7 +176,7 @@ namespace DataAccess.DataAccess
 
         public async Task<Tuple<bool, string[]>> LoginAsync(UserDTO user)
         {
-            var existingUser = _appUserManager.FindByNameAsync(user.NationalID).Result;
+            var existingUser = _appUserManager.FindByNameAsync(user.UserName).Result;
 
             List<string> errorList = new List<string>();
 

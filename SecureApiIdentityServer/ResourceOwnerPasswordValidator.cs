@@ -20,7 +20,7 @@ namespace SecureApiIdentityServer
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
             UserDTO usrObj = new UserDTO();
-            usrObj.NationalID = context.UserName;
+            usrObj.UserName = context.UserName;
             usrObj.Password = context.Password;
 
 

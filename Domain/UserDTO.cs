@@ -16,10 +16,11 @@ namespace Domain
         public DateTime? LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
-        public string NationalID { get; set; }
+        public string UserName { get; set; }
         public bool IsFirstAttempt { get; set; }
         public bool IsTempararyPassword { get; set; }
         public bool ActiveStatus { get; set; }
+        public string FullName { get; set; }
 
     }
 }

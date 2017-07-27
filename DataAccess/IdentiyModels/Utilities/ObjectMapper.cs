@@ -31,8 +31,10 @@ namespace DataAccess.IdentiyModels.Utilities
             appUser.PhoneNumberConfirmed = usr.PhoneNumberConfirmed;
             appUser.SecurityStamp = usr.SecurityStamp;
             appUser.TwoFactorEnabled = usr.TwoFactorEnabled;
-            appUser.UserName = usr.NationalID;
+            appUser.UserName = usr.UserName;
             appUser.ActiveStatus = usr.ActiveStatus;
+            appUser.FullName = usr.FullName;
+
             return appUser;
         }
 
@@ -54,9 +56,9 @@ namespace DataAccess.IdentiyModels.Utilities
                 PhoneNumberConfirmed = appUser.PhoneNumberConfirmed,
                 SecurityStamp = appUser.SecurityStamp,
                 TwoFactorEnabled = appUser.TwoFactorEnabled,
-                NationalID = appUser.UserName,
-                ActiveStatus = appUser.ActiveStatus
-
+                UserName = appUser.UserName,
+                ActiveStatus = appUser.ActiveStatus,
+                FullName = appUser.FullName
             };
         }
 
