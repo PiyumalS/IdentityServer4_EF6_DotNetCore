@@ -20,7 +20,16 @@ namespace Domain
         public bool IsFirstAttempt { get; set; }
         public bool IsTempararyPassword { get; set; }
         public bool ActiveStatus { get; set; }
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime? LastPasswordChangeDate { get; set; }
+        public DateTime? LastLoginDate { get; set; }
+        public bool TermsAndConditionStatus { get; set; }
+        public DateTime? TermsAndConditionAcceptDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
 
     }
 }

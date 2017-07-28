@@ -8,25 +8,24 @@ using System.Threading.Tasks;
 
 namespace DataAccess.IdentiyModels
 {
-    public class Permission
+    public class RolePermissionMap
     {
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string RoleId { get; set; }
         [Required]
-        public int ModuleId { get; set; }
-        public string Description { get; set; }
-        public string PermissionCode { get; set; }
+        public int PermissionId { get; set; }
         [Required]
         public bool Status { get; set; }
         [Required]
         public string CreatedBy { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; }
-        public string UpdatedBy { get; set; }
-        public DateTime? UpdatedDate { get; set; }
 
-        [ForeignKey("ModuleId")]
-        public Module Module { get; set; }
+        [ForeignKey("PermissionId")]
+        public Permission Permission { get; set; }
+
+        [ForeignKey("RoleId")]
+        public ApplicationRole ApplicationRole { get; set; }
     }
 }

@@ -33,7 +33,16 @@ namespace DataAccess.IdentiyModels.Utilities
             appUser.TwoFactorEnabled = usr.TwoFactorEnabled;
             appUser.UserName = usr.UserName;
             appUser.ActiveStatus = usr.ActiveStatus;
-            appUser.FullName = usr.FullName;
+            appUser.FirstName = usr.FirstName;
+            appUser.LastName = usr.LastName;
+            appUser.LastPasswordChangeDate = usr.LastPasswordChangeDate;
+            appUser.LastLoginDate = usr.LastLoginDate;
+            appUser.TermsAndConditionStatus = usr.TermsAndConditionStatus;
+            appUser.TermsAndConditionAcceptDate = usr.TermsAndConditionAcceptDate;
+            appUser.CreatedBy = usr.CreatedBy;
+            appUser.CreatedDate = usr.CreatedDate;
+            appUser.UpdatedBy = usr.UpdatedBy;
+            appUser.UpdatedDate = usr.UpdatedDate;
 
             return appUser;
         }
@@ -58,16 +67,32 @@ namespace DataAccess.IdentiyModels.Utilities
                 TwoFactorEnabled = appUser.TwoFactorEnabled,
                 UserName = appUser.UserName,
                 ActiveStatus = appUser.ActiveStatus,
-                FullName = appUser.FullName
-            };
+                FirstName = appUser.FirstName,
+                LastName = appUser.LastName,
+                LastPasswordChangeDate = appUser.LastPasswordChangeDate,
+                LastLoginDate = appUser.LastLoginDate,
+                TermsAndConditionStatus = appUser.TermsAndConditionStatus,
+                TermsAndConditionAcceptDate = appUser.TermsAndConditionAcceptDate,
+                CreatedBy = appUser.CreatedBy,
+                CreatedDate = appUser.CreatedDate,
+                UpdatedBy = appUser.UpdatedBy,
+                UpdatedDate = appUser.UpdatedDate
+        };
         }
 
         public ApplicationRole ConvertRoleToIdentityRole(RoleDTO role)
         {
             return new ApplicationRole()
             {
-                Name = role.Name
-            };
+                Name = role.Name,
+                CreatedBy = role.CreatedBy,
+                CreatedDate = role.CreatedDate,
+                UpdatedBy = role.UpdatedBy,
+                UpdatedDate = role.UpdatedDate,
+                Status = role.Status,
+                RoleCode = role.RoleCode,
+                Description = role.Description
+        };
         }
 
 
@@ -76,7 +101,14 @@ namespace DataAccess.IdentiyModels.Utilities
             return new RoleDTO()
             {
                 Name = appRole.Name,
-                Id = appRole.Id
+                Id = appRole.Id,
+                CreatedBy = appRole.CreatedBy,
+                CreatedDate = appRole.CreatedDate,
+                UpdatedBy = appRole.UpdatedBy,
+                UpdatedDate = appRole.UpdatedDate,
+                Status = appRole.Status,
+                RoleCode = appRole.RoleCode,
+                Description = appRole.Description
             };
         }
     }

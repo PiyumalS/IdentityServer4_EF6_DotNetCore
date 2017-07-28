@@ -30,7 +30,8 @@ namespace SecureApiIdentityServer
 
             var userObj = userDetails.Item1;
             var usrRoles = userDetails.Item2;
-            var usrPermission = userDetails.Item3;
+            var usrPermission = new List<string> { };
+            usrPermission = userDetails.Item3;
 
             // add user claims (permissions + user data) , roles here
             var claims = new List<Claim>
@@ -38,7 +39,8 @@ namespace SecureApiIdentityServer
                new Claim(JwtClaimTypes.Subject, context.Subject.GetSubjectId()),
                new Claim(JwtClaimTypes.Email, userObj.Email),
                new Claim(JwtClaimTypes.EmailVerified, userObj.EmailConfirmed.ToString(), ClaimValueTypes.Boolean),
-               new Claim("FullName",String.IsNullOrEmpty(userObj.FullName)?userObj.UserName:userObj.FullName),
+               new Claim("FirstName",String.IsNullOrEmpty(userObj.FirstName)?userObj.UserName:userObj.FirstName),
+               new Claim("LastName",String.IsNullOrEmpty(userObj.LastName)?userObj.UserName:userObj.LastName),
                new Claim("UserName",userObj.UserName),
                new Claim("PhoneNumber",userObj.PhoneNumber),
                new Claim("IsFirstAttempt",userObj.IsFirstAttempt.ToString(),ClaimValueTypes.Boolean),
@@ -50,9 +52,9 @@ namespace SecureApiIdentityServer
                 claims.Add(new Claim(JwtClaimTypes.Role, usrRoles.ElementAt(i)));
             }
 
-            for (int i = 0; i < usrPermission.Length; i++)
+            for (int i = 0; i < usrPermission.Count; i++)
             {
-                claims.Add(new Claim(PermissionUtil.Permission, usrPermission.ElementAt(i)));
+                claims.Add(new Claim(PermissionUtil.Permission, usrPermission[i]));
             }
 
             context.IssuedClaims = claims;

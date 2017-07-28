@@ -15,7 +15,7 @@ namespace Business
             _userAccess = usrAccess;
         }
 
-        public async Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO roleObj, IEnumerable<string> claims)
+        public async Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO roleObj, IEnumerable<int> claims)
         {
             var createdRole = await _userAccess.CreateRoleAsync(roleObj, claims);
             return Tuple.Create(createdRole.Item1, new string[] { createdRole.Item2.ToString() });
@@ -32,7 +32,7 @@ namespace Business
             return _userAccess.FindUserByID(user);
         }
 
-        public Task<Tuple<UserDTO, string[], string[]>> FindUserRolesPermissions(UserDTO user)
+        public Task<Tuple<UserDTO, string[], List<string>>> FindUserRolesPermissions(UserDTO user)
         {
             return _userAccess.FindUserRolesPermissions(user);
         }

@@ -31,45 +31,7 @@ namespace SecureApiIdentityServer.Controllers
         //[RequiresPermission("p1")]
         public IEnumerable<string> Get()
         {
-            try
-            {
-
-
-                RoleDTO roleDTO = new RoleDTO();
-                roleDTO.Name = "Admin2";
-
-                _userManager.CreateRoleAsync(roleDTO, new string[] { "p1", "p2", "p3" }).Wait();
-
-
-
-                try
-                {
-                    UserDTO nwDTO = new UserDTO();
-                    nwDTO.Email = "nile@gmail.com";
-                    nwDTO.IsTempararyPassword = true;
-                    nwDTO.UserName = "8957815122V";
-                    nwDTO.IsFirstAttempt = true;
-                    nwDTO.PhoneNumber = "123123123";
-                    nwDTO.LockoutEnabled = false;
-                    nwDTO.Password = "123";
-                    nwDTO.ActiveStatus = true;
-
-                    _userManager.CreateUserAsync(nwDTO, new string[] { roleDTO.Name });
-
-                    return new string[] { "value1", "value2" };
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+            return new string[] { "value1", "value2" };
 
         }
 

@@ -59,23 +59,25 @@
     <Compile Include="DataAccess\UserAccess.cs" />
     <Compile Include="IdentiyModels\ApplicationRole.cs" />
     <Compile Include="IdentiyModels\ApplicationUser.cs" />
+    <Compile Include="IdentiyModels\ApplicationUserRoleMap.cs" />
     <Compile Include="IdentiyModels\Managers\ApplicationRoleManager.cs" />
     <Compile Include="IdentiyModels\Managers\ApplicationUserManager.cs" />
+    <Compile Include="IdentiyModels\Module.cs" />
     <Compile Include="IdentiyModels\Permission.cs" />
-    <Compile Include="IdentiyModels\RolePermission.cs" />
+    <Compile Include="IdentiyModels\RolePermissionMap.cs" />
     <Compile Include="IdentiyModels\Utilities\ObjectMapper.cs" />
-    <Compile Include="Migrations\201707260945161_mg1.cs" />
-    <Compile Include="Migrations\201707260945161_mg1.Designer.cs">
-      <DependentUpon>201707260945161_mg1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707270435505_mgr2.cs" />
-    <Compile Include="Migrations\201707270435505_mgr2.Designer.cs">
-      <DependentUpon>201707270435505_mgr2.cs</DependentUpon>
+    <Compile Include="Migrations\201707280559276_mg1.cs" />
+    <Compile Include="Migrations\201707280559276_mg1.Designer.cs">
+      <DependentUpon>201707280559276_mg1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds\ISeed.cs" />
+    <Compile Include="Migrations\Seeds\Modules.cs" />
+    <Compile Include="Migrations\Seeds\RolePermissionMaps.cs" />
     <Compile Include="Migrations\Seeds\Permissions.cs" />
+    <Compile Include="Migrations\Seeds\Roles.cs" />
     <Compile Include="Migrations\Seeds\SeedCore.cs" />
+    <Compile Include="Migrations\Seeds\Users.cs" />
     <Compile Include="MyContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TAD.cs" />
@@ -95,11 +97,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707260945161_mg1.resx">
-      <DependentUpon>201707260945161_mg1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707270435505_mgr2.resx">
-      <DependentUpon>201707270435505_mgr2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707280559276_mg1.resx">
+      <DependentUpon>201707280559276_mg1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

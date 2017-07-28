@@ -18,8 +18,9 @@ namespace DataAccess
         {
         }
 
+        public DbSet<Module> Modules { get; set; }
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<RolePermissionMap> RolePermissionMaps { get; set; }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
@@ -28,15 +29,17 @@ namespace DataAccess
         {
             Database.SetInitializer<TAD>(null);
             base.OnModelCreating(modelBuilder);
-            modelBuilder.HasDefaultSchema("tad");
+            modelBuilder.HasDefaultSchema("tadrnd");
 
             modelBuilder.Entity<ApplicationUser>().ToTable("TAD_T_Users");
             modelBuilder.Entity<IdentityRole>().ToTable("TAD_T_Roles");
-            modelBuilder.Entity<IdentityUserRole>().ToTable("TAD_T_UserRoles");
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("TAD_T_UserLogins");
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("TAD_T_UserClaims");
+            modelBuilder.Entity<ApplicationRole>().ToTable("TAD_T_Roles");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("TAD_T_UserRoleMap");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("TAD_T_UserLoginMap");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("TAD_T_UserClaimMap");
+            modelBuilder.Entity<Module>().ToTable("TAD_T_Modules");
             modelBuilder.Entity<Permission>().ToTable("TAD_T_Permissions");
-            modelBuilder.Entity<RolePermission>().ToTable("TAD_T_RolePermissions");
+            modelBuilder.Entity<RolePermissionMap>().ToTable("TAD_T_RolePermissionMap");
         }
     }
 

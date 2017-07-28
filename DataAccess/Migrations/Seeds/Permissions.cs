@@ -19,15 +19,27 @@ namespace DataAccess.Migrations.Seeds
             {
                 new Permission
                 {
-                    Name = ViewUsers
+                    Name = ViewUsers,
+                    CreatedBy = "SuperAdmin",
+                    CreatedDate = DateTime.Now,
+                    Status = true,
+                    ModuleId = 1
                 },
                 new Permission
                 {
-                    Name = AddUsers
+                    Name = AddUsers,
+                    CreatedBy = "SuperAdmin",
+                    CreatedDate = DateTime.Now,
+                    Status = true,
+                    ModuleId = 1
                 },
                 new Permission
                 {
-                    Name = DeleteUsers
+                    Name = DeleteUsers,
+                    CreatedBy = "SuperAdmin",
+                    CreatedDate = DateTime.Now,
+                    Status = true,
+                    ModuleId = 1
                 }
             });
 

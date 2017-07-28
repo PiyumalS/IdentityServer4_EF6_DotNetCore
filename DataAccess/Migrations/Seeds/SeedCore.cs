@@ -11,7 +11,11 @@ namespace DataAccess.Migrations.Seeds
         public static void RunSeeds(TAD context)
         {
             var seedList = new List<ISeed>();
+            seedList.Add(new Modules());
             seedList.Add(new Permissions());
+            seedList.Add(new Roles());
+            seedList.Add(new RolePermissionMaps());
+            seedList.Add(new Users());
 
             foreach (var seedResource in seedList)
             {

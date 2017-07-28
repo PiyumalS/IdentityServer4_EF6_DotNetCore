@@ -11,14 +11,14 @@ namespace DataAccess.DataAccess
     public interface IUserAccess
     {
         Task<Tuple<bool, string[]>> CreateUserAsync(UserDTO user, IEnumerable<string> roles, string password);
-        Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO role, IEnumerable<string> claims);
+        Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO role, IEnumerable<int> claims);
         Task<Tuple<bool, string[]>> DeleteRoleAsync(ApplicationRole role);
         Task<Tuple<bool, string[]>> DeleteRoleAsync(string roleName);
         Task<Tuple<bool, string[]>> DeleteUserAsync(ApplicationUser user);
         Task<Tuple<bool, string[]>> DeleteUserAsync(string userId);
         Task<Tuple<bool, string[]>> LoginAsync(UserDTO user);
         UserDTO FindUserByID(UserDTO user);
-        Task<Tuple<UserDTO, string[], string[]>> FindUserRolesPermissions(UserDTO user);
+        Task<Tuple<UserDTO, string[], List<string>>> FindUserRolesPermissions(UserDTO user);
         Task<ApplicationRole> GetRoleByIdAsync(string roleId);
         Task<ApplicationRole> GetRoleByNameAsync(string roleName);
         Task<ApplicationRole> GetRoleLoadRelatedAsync(string roleName);
@@ -31,7 +31,7 @@ namespace DataAccess.DataAccess
         Task<List<Tuple<ApplicationUser, string[]>>> GetUsersAndRolesAsync(int page, int pageSize);
         Task<Tuple<bool, string[]>> ResetPasswordAsync(UserDTO user, string newPassword);
         Task<Tuple<bool, string[]>> UpdatePasswordAsync(UserDTO user, string currentPassword, string newPassword);
-        Task<Tuple<bool, string[]>> UpdateRoleAsync(RoleDTO role, IEnumerable<string> claims);
+        Task<Tuple<bool, string[]>> UpdateRoleAsync(RoleDTO role, IEnumerable<int> claims);
         Task<Tuple<bool, string[]>> UpdateUserAsync(UserDTO user);
         Task<Tuple<bool, string[]>> UpdateUserAsync(UserDTO user, IEnumerable<string> roles);
 

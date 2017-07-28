@@ -27,7 +27,7 @@ namespace DataAccess.DataAccess
             _appRoleManager = ApplicationRoleManager.Create(_context);
         }
 
-        public async Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO role, IEnumerable<string> claims)
+        public async Task<Tuple<bool, string[]>> CreateRoleAsync(RoleDTO role, IEnumerable<int> claims)
         {
             ObjectMapper mapper = new ObjectMapper();
             ApplicationRole appRole = mapper.ConvertRoleToIdentityRole(role);
@@ -47,18 +47,18 @@ namespace DataAccess.DataAccess
 
                     if (claims != null)
                     {
-                        List<RolePermission> rolePermissionList = new List<RolePermission>();
+                        List<RolePermissionMap> rolePermissionList = new List<RolePermissionMap>();
 
-                        foreach (string claim in claims)
+                        foreach (int claim in claims)
                         {
-                            RolePermission tmpDTO = new RolePermission();
-                            tmpDTO.PermissionID = claim;
-                            tmpDTO.RoleID = appRole.Id;
+                            RolePermissionMap tmpDTO = new RolePermissionMap();
+                            tmpDTO.PermissionId = claim;
+                            tmpDTO.RoleId = appRole.Id;
 
                             rolePermissionList.Add(tmpDTO);
                         }
 
-                        _context.RolePermissions.AddRange(rolePermissionList);
+                        _context.RolePermissionMaps.AddRange(rolePermissionList);
                         await _context.SaveChangesAsync();
                         dbContextTransaction.Commit();
 
@@ -232,7 +232,7 @@ namespace DataAccess.DataAccess
 
         }
 
-        public async Task<Tuple<UserDTO, string[], string[]>> FindUserRolesPermissions(UserDTO user)
+        public async Task<Tuple<UserDTO, string[], List<string>>> FindUserRolesPermissions(UserDTO user)
         {
             try
             {
@@ -244,8 +244,16 @@ namespace DataAccess.DataAccess
 
                 var roles = await _context.Roles.Where(r => userRolesIds.Contains(r.Id)).Select(r => r.Name).ToArrayAsync();
 
-                var permissions = await _context.RolePermissions.Where(r => userRolesIds.Contains(r.RoleID)).Select(p => p.PermissionID).ToArrayAsync();
+                var permissionIds = await _context.RolePermissionMaps.Where(r => userRolesIds.Contains(r.RoleId)).Select(p => p.PermissionId).ToArrayAsync();
 
+                var permissions = new List<string> { };
+
+                for (int i = 0; i < permissionIds.Length; i++)
+                {
+                    var permissionId = permissionIds[i];
+                    var permission = _context.Permissions.Where(p => p.Id == permissionId).Select(p => p.Name).FirstOrDefault().ToString();
+                    permissions.Add(permission);
+                }
 
                 ObjectMapper mapper = new ObjectMapper();
 
@@ -381,7 +389,7 @@ namespace DataAccess.DataAccess
             return Tuple.Create(true, new string[] { });
         }
 
-        public async Task<Tuple<bool, string[]>> UpdateRoleAsync(RoleDTO role, IEnumerable<string> claims)
+        public async Task<Tuple<bool, string[]>> UpdateRoleAsync(RoleDTO role, IEnumerable<int> claims)
         {
             ObjectMapper mapper = new ObjectMapper();
             ApplicationRole appRole = mapper.ConvertRoleToIdentityRole(role);
