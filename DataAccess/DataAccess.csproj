@@ -59,7 +59,6 @@
     <Compile Include="DataAccess\UserAccess.cs" />
     <Compile Include="IdentiyModels\ApplicationRole.cs" />
     <Compile Include="IdentiyModels\ApplicationUser.cs" />
-    <Compile Include="IdentiyModels\ApplicationUserRoleMap.cs" />
     <Compile Include="IdentiyModels\Managers\ApplicationRoleManager.cs" />
     <Compile Include="IdentiyModels\Managers\ApplicationUserManager.cs" />
     <Compile Include="IdentiyModels\Module.cs" />
@@ -72,12 +71,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds\ISeed.cs" />
-    <Compile Include="Migrations\Seeds\Modules.cs" />
-    <Compile Include="Migrations\Seeds\RolePermissionMaps.cs" />
-    <Compile Include="Migrations\Seeds\Permissions.cs" />
-    <Compile Include="Migrations\Seeds\Roles.cs" />
+    <Compile Include="Migrations\Seeds\UserManagement\Modules.cs" />
+    <Compile Include="Migrations\Seeds\UserManagement\RolePermissionMaps.cs" />
+    <Compile Include="Migrations\Seeds\UserManagement\Permissions.cs" />
+    <Compile Include="Migrations\Seeds\UserManagement\Roles.cs" />
     <Compile Include="Migrations\Seeds\SeedCore.cs" />
-    <Compile Include="Migrations\Seeds\Users.cs" />
+    <Compile Include="Migrations\Seeds\UserManagement\UserRole.cs" />
+    <Compile Include="Migrations\Seeds\UserManagement\Users.cs" />
     <Compile Include="MyContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TAD.cs" />

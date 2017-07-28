@@ -1,11 +1,14 @@
 ﻿using DataAccess.IdentiyModels;
+using DataAccess.Migrations.Seeds;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Migrations.Seeds
+namespace DataAccess.Migrations.Seeds.UserManagement
 {
     public class Permissions : ISeed
     {
@@ -15,12 +18,16 @@ namespace DataAccess.Migrations.Seeds
 
         public void SeedData(TAD context)
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var getUser = new ApplicationUser();
+            getUser = userManager.FindByName("893569524V");
+
             context.Permissions.AddRange(new List<Permission>
             {
                 new Permission
                 {
                     Name = ViewUsers,
-                    CreatedBy = "SuperAdmin",
+                    CreatedBy = getUser.Id,
                     CreatedDate = DateTime.Now,
                     Status = true,
                     ModuleId = 1
@@ -28,7 +35,7 @@ namespace DataAccess.Migrations.Seeds
                 new Permission
                 {
                     Name = AddUsers,
-                    CreatedBy = "SuperAdmin",
+                    CreatedBy = getUser.Id,
                     CreatedDate = DateTime.Now,
                     Status = true,
                     ModuleId = 1
@@ -36,7 +43,7 @@ namespace DataAccess.Migrations.Seeds
                 new Permission
                 {
                     Name = DeleteUsers,
-                    CreatedBy = "SuperAdmin",
+                    CreatedBy = getUser.Id,
                     CreatedDate = DateTime.Now,
                     Status = true,
                     ModuleId = 1

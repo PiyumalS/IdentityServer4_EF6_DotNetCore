@@ -1,4 +1,5 @@
 ﻿using DataAccess.IdentiyModels;
+using DataAccess.Migrations.Seeds;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Migrations.Seeds
+namespace DataAccess.Migrations.Seeds.UserManagement
 {
     public class Users : ISeed
     {
@@ -43,12 +44,6 @@ namespace DataAccess.Migrations.Seeds
                 userManager.Create(user);
                 context.SaveChanges();
             }
-
-
-            getUser = userManager.FindByName("893569524V");
-            userManager.AddToRole(getUser.Id, Roles.SuperAdmin);
-
-            context.SaveChanges();
         }
     }
 }
