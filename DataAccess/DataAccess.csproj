@@ -65,9 +65,9 @@
     <Compile Include="IdentiyModels\Permission.cs" />
     <Compile Include="IdentiyModels\RolePermissionMap.cs" />
     <Compile Include="IdentiyModels\Utilities\ObjectMapper.cs" />
-    <Compile Include="Migrations\201707280559276_mg1.cs" />
-    <Compile Include="Migrations\201707280559276_mg1.Designer.cs">
-      <DependentUpon>201707280559276_mg1.cs</DependentUpon>
+    <Compile Include="Migrations\201708040531027_init.cs" />
+    <Compile Include="Migrations\201708040531027_init.Designer.cs">
+      <DependentUpon>201708040531027_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds\ISeed.cs" />
@@ -97,8 +97,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707280559276_mg1.resx">
-      <DependentUpon>201707280559276_mg1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708040531027_init.resx">
+      <DependentUpon>201708040531027_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
