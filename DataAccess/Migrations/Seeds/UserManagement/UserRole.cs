@@ -1,12 +1,6 @@
 ﻿using DataAccess.IdentiyModels;
-using DataAccess.Migrations.Seeds;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Migrations.Seeds.UserManagement
 {
@@ -19,6 +13,11 @@ namespace DataAccess.Migrations.Seeds.UserManagement
             getUser = userManager.FindByName("893569524V");
 
             userManager.AddToRole(getUser.Id, Roles.SuperAdmin);
+
+            var getUser1 = new ApplicationUser();
+            getUser1 = userManager.FindByName("893569525V");
+
+            userManager.AddToRole(getUser1.Id, Roles.Admin);
 
             context.SaveChanges();
         }

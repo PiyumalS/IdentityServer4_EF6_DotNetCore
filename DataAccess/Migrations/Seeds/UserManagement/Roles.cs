@@ -13,6 +13,7 @@ namespace DataAccess.Migrations.Seeds.UserManagement
     public class Roles : ISeed
     {
         public static string SuperAdmin = "SuperAdmin";
+        public static string Admin = "Admin";
 
         public void SeedData(TAD context)
         {
@@ -26,6 +27,14 @@ namespace DataAccess.Migrations.Seeds.UserManagement
                 roleManager.Create(new ApplicationRole
                 {
                     Name = SuperAdmin,
+                    CreatedBy = getUser.Id,
+                    CreatedDate = DateTime.Now,
+                    Status = true
+                });
+
+                roleManager.Create(new ApplicationRole
+                {
+                    Name = Admin,
                     CreatedBy = getUser.Id,
                     CreatedDate = DateTime.Now,
                     Status = true

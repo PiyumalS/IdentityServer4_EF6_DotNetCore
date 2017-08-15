@@ -17,7 +17,7 @@ var ResourcesComponent = (function () {
             .subscribe(function (res) {
             _this.values = res.json();
         }, function (error) {
-            console.log(error);
+            _this.error = error.statusText + ' : ' + error.status;
         });
     }
     return ResourcesComponent;

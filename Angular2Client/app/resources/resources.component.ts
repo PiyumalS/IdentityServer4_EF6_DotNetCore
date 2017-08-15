@@ -8,6 +8,7 @@ import { AuthHttp } from 'angular2-jwt';
 export class ResourcesComponent {
 
     values: any;
+    error: string;
 
     constructor(private authHttp: AuthHttp) {
         // Sends an authenticated request.
@@ -17,7 +18,7 @@ export class ResourcesComponent {
                 this.values = res.json();
             },
             (error: any) => {
-                console.log(error);
+                this.error = error.statusText + ' : ' + error.status;
             });
     }
 

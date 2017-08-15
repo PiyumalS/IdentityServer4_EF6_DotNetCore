@@ -27,7 +27,7 @@ namespace SecureApiIdentityServer.Controllers
         // GET api/values
         [HttpGet]
         [Authorize]
-        //[RequiresPermission("ViewUsers")]
+        [RequiresPermission("ViewUsers")]
         public IEnumerable<string> Get()
         {
             List<string> colors = new List<string>();
@@ -35,6 +35,28 @@ namespace SecureApiIdentityServer.Controllers
             colors.Add("Blue");
             colors.Add("Green");
             return colors;
+        }
+
+        [HttpGet("GetAuthOnly")]
+        [Authorize]
+        public IEnumerable<string> GetAuthOnly()
+        {
+            List<string> numbers = new List<string>();
+            numbers.Add("1");
+            numbers.Add("2");
+            numbers.Add("3");
+            return numbers;
+        }
+
+        [HttpGet("GetCustomPermission")]
+        [RequiresPermission("ViewUsers")]
+        public IEnumerable<string> GetCustomPermission()
+        {
+            List<string> names = new List<string>();
+            names.Add("Kamal");
+            names.Add("Sunil");
+            names.Add("Amal");
+            return names;
         }
 
         // GET api/values/5

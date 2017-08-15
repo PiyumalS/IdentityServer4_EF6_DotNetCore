@@ -37,6 +37,24 @@ namespace DataAccess.Migrations.Seeds.UserManagement
 
             #endregion
 
+            #region Admin
+
+            //var adminRole = roleManager.FindByName(Roles.Admin);
+
+            //foreach (var permission in context.Permissions)
+            //{
+            //    context.RolePermissionMaps.Add(new RolePermissionMap
+            //    {
+            //        RoleId = superAdminRole.Id,
+            //        PermissionId = permission.Id,
+            //        CreatedBy = getUser.Id,
+            //        CreatedDate = DateTime.Now,
+            //        Status = true
+            //    });
+            //}
+
+            #endregion
+
             context.SaveChanges();
         }
     }

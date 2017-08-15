@@ -1,12 +1,8 @@
 ﻿using DataAccess.IdentiyModels;
-using DataAccess.Migrations.Seeds;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Migrations.Seeds.UserManagement
 {
@@ -42,6 +38,34 @@ namespace DataAccess.Migrations.Seeds.UserManagement
                 user.PasswordHash = hashed;
 
                 userManager.Create(user);
+                context.SaveChanges();
+            }
+
+            var user1 = new ApplicationUser
+            {
+                UserName = "893569525V",
+                Email = "jkcssuperadmin@jkcsworld.com",
+                EmailConfirmed = true,
+                FirstName = "Admin",
+                LastName = "Admin",
+                ActiveStatus = true,
+                IsTempararyPassword = true,
+                IsFirstAttempt = true,
+                PhoneNumber = "0776532148",
+                LockoutEnabled = false,
+                CreatedBy = "SuperAdmin",
+                CreatedDate = DateTime.Now,
+                TermsAndConditionStatus = true,
+                PhoneNumberConfirmed = true
+            };
+
+            if (!context.Users.Any(u => u.UserName == user1.UserName))
+            {
+                var password = new PasswordHasher();
+                var hashed = password.HashPassword("12345");
+                user1.PasswordHash = hashed;
+
+                userManager.Create(user1);
                 context.SaveChanges();
             }
         }
