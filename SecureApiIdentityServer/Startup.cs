@@ -41,18 +41,17 @@ namespace SecureApiIdentityServer
 
             //services.AddAuthorization(options =>
             //{
-            //    options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "p1"));
-            //    options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "p2"));
-            //    options.AddPolicy("permission3", policy => policy.RequireClaim("permission", "p3"));
-            //    options.AddPolicy("permission4", policy => policy.RequireClaim("permission", "p4"));
+            //    options.AddPolicy("permission1", policy => policy.RequireClaim("permission", "ViewUsers"));
+            //    options.AddPolicy("permission2", policy => policy.RequireClaim("permission", "AddUsers"));
+            //    options.AddPolicy("permission3", policy => policy.RequireClaim("permission", "DeleteUsers"));
             //});
-
-
 
             services.AddIdentityServer()
              .AddTemporarySigningCredential()
              .AddInMemoryClients(ISConfig.GetClients())
+             .AddInMemoryIdentityResources(ISConfig.GetIdentityResources())
              .AddInMemoryApiResources(ISConfig.GetApiResources());
+             
 
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
              .AddTransient<IProfileService, ProfileService>();
@@ -61,6 +60,9 @@ namespace SecureApiIdentityServer
 
             services.AddSingleton<IUserAccess, UserAccess>();
             services.AddSingleton<IUserManager, UserManager>();
+
+            // Enable cors if required
+            services.AddCors();
 
             // Add framework services.
             services.AddMvc();
@@ -81,6 +83,12 @@ namespace SecureApiIdentityServer
                 
                 ApiName = "api1"
             });
+
+            // Configure Cors if enabled
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 
             if (env.IsDevelopment())
             {

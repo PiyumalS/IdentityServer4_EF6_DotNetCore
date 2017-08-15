@@ -25,14 +25,16 @@ namespace SecureApiIdentityServer.Controllers
         }
 
         // GET api/values
-        //[Authorize("permission1")]
         [HttpGet]
-        //[Authorize]
-        //[RequiresPermission("p1")]
+        [Authorize]
+        //[RequiresPermission("ViewUsers")]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
-
+            List<string> colors = new List<string>();
+            colors.Add("Red");
+            colors.Add("Blue");
+            colors.Add("Green");
+            return colors;
         }
 
         // GET api/values/5

@@ -1,0 +1,64 @@
+﻿{
+  "extends": "tslint:recommended",
+  "rulesDirectory": [
+    "node_modules/codelyzer"
+  ],
+  "rules": {
+    "directive-selector": [
+      false
+    ],
+    "component-selector": [
+      false
+    ],
+    "use-input-property-decorator": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "no-attribute-parameter-decorator": true,
+    "no-input-rename": true,
+    "no-output-rename": true,
+    "no-forward-ref": true,
+    "use-life-cycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "pipe-naming": [
+      true,
+      "camelCase"
+    ],
+    "component-class-suffix": true,
+    "directive-class-suffix": true,
+    "templates-use-public": false,
+    "no-access-missing-member": false,
+    "invoke-injectable": true,
+    "forin": false,
+    "max-classes-per-file": [ false ],
+    "member-access": false,
+    "no-console": [
+      false
+    ],
+    "no-shadowed-variable": false,
+    "object-literal-shorthand": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": [
+      false
+    ],
+    "quotemark": [ false ],
+    "radix": false,
+    "trailing-comma": [
+      false
+    ],
+    "triple-equals": [ false ],
+    "typedef": [ false ],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ]
+  }
+}
