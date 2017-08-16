@@ -6,30 +6,12 @@ namespace SecureApiIdentityServer
 {
     public class ISConfig
     {
-
-        /*
-           public static IEnumerable<Scope> GetScopes()
-           {
-               return new List<Scope>
-               {
-                   new Scope
-                   {
-                       Name = "api1",
-                       Description = "My API"
-                   }
-               };
-           }
-
-       */
-
         // Identity resources (used by UserInfo endpoint).
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
             {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
-                new IdentityResource("roles", new List<string> { "role" })
+                new IdentityResources.OpenId()
             };
         }
 
@@ -38,7 +20,6 @@ namespace SecureApiIdentityServer
         {
             return new List<ApiResource>
             {
-                //new ApiResource("api1", "My API")
                 new ApiResource("api1" ) {
                     UserClaims = { "role" }
                 }
@@ -64,8 +45,6 @@ namespace SecureApiIdentityServer
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId, // For UserInfo endpoint.
-                        IdentityServerConstants.StandardScopes.Profile,
-                        "roles",
                         "api1"
                     },
                     AccessTokenLifetime = 60,
