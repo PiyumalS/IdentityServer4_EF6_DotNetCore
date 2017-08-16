@@ -25,7 +25,7 @@ export class Config {
     /**
      * The api1, refresh token (offline_access) & user info (openid profile roles).
      */
-    public static readonly SCOPE: string = "api1 offline_access openid profile roles";
+    public static readonly SCOPE: string = "api1 offline_access openid";
 
     public static readonly CLIENT_SECRET: string = "secret";
 

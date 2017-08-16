@@ -1,5 +1,5 @@
 {
-  "name": "angular-spa-web-api",
+  "name": "angular-client",
   "version": "1.0.0",
   "description": "Angular Single Page Application with an ASP.NET Core Web API that uses token authentication",
   "main": "",
@@ -17,12 +17,6 @@
     "ROPC",
     "token authentication"
   ],
-  "author": "Roberto Simonetti",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "bugs": {
     "url": ""
   },
